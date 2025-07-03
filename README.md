@@ -2,7 +2,7 @@
 
 _Transform Ideas into Seamless Digital Experiences_
 
-[🔗 Live Demo](https://github.com/vijay2668/whatbytes-assignment)
+[🔗 Live Demo](https://whatbytes-assignment-nine.vercel.app)
 
 ![last-commit](https://img.shields.io/github/last-commit/vijay2668/whatbytes-assignment?style=flat&logo=git&logoColor=white&color=0080ff)
 ![repo-top-language](https://img.shields.io/github/languages/top/vijay2668/whatbytes-assignment?style=flat&color=0080ff)
