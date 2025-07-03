@@ -2,6 +2,7 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { useCart } from "@/contexts/CartContext";
 import { products } from "@/data/products";
 import { ArrowLeft, Star } from "lucide-react";
 import Image from "next/image";
@@ -14,8 +15,9 @@ export default function ProductIdPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = use(params);
+  const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
-
+  
   const product = products.find((p) => p.id === id);
 
   if (!product) {
@@ -31,7 +33,11 @@ export default function ProductIdPage({
     );
   }
 
-  const handleAddToCart = () => {};
+  const handleAddToCart = () => {
+    for (let i = 0; i < quantity; i++) {
+      addToCart(product);
+    }
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">

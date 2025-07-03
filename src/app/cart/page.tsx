@@ -1,13 +1,13 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { useCart } from "@/contexts/CartContext";
 import { Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function CartPage() {
-  const items = [];
-  const total = 0;
+  const { items, total, clearCart, removeFromCart, updateQuantity } = useCart();
 
   if (items.length === 0) {
     return (
@@ -32,7 +32,9 @@ export default function CartPage() {
     <div className="container mx-auto px-4 py-8">
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-3xl font-bold">Shopping Cart</h1>
-        <Button variant="destructive">Clear Cart</Button>
+        <Button variant="destructive" onClick={clearCart}>
+          Clear Cart
+        </Button>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -74,6 +76,7 @@ export default function CartPage() {
                     <Button
                       variant="outline"
                       size="sm"
+                      onClick={() => updateQuantity(item.id, item.quantity - 1)}
                       disabled={item.quantity <= 1}
                     >
                       <Minus className="h-3 w-3" />
@@ -81,7 +84,11 @@ export default function CartPage() {
                     <span className="px-3 py-1 bg-muted rounded-md font-medium min-w-8 text-center">
                       {item.quantity}
                     </span>
-                    <Button variant="outline" size="sm">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                    >
                       <Plus className="h-3 w-3" />
                     </Button>
                   </div>
@@ -90,6 +97,7 @@ export default function CartPage() {
                   <Button
                     variant="ghost"
                     size="sm"
+                    onClick={() => removeFromCart(item.id)}
                     className="text-destructive hover:text-destructive-foreground hover:bg-destructive/20"
                   >
                     <Trash2 className="h-4 w-4" />
